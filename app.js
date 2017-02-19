@@ -1,7 +1,8 @@
 // const accountSid = Secrets.TWACCOUNTSID;
 // const authToken = Secrets.TWAUTHTOKEN;
-
+// webhook server url is an ngrok tunnel
 // sid and authToken should be stored in the bash session while developing. check readme
+
 const accountSid = process.env.TWACCOUNTSID;
 const authToken = process.env.TWAUTHTOKEN;
 
