@@ -5,8 +5,10 @@
 
 const accountSid = process.env.TWACCOUNTSID;
 const authToken = process.env.TWAUTHTOKEN;
+//(347) 321-9435
 
 var http = require('http');
+var util = require('util');
 const twilio = require('twilio');
 const express = require('express');
 const urlencoded = require('body-parser').urlencoded;
@@ -38,6 +40,7 @@ let postObj = {
 let ONE_DEGREE_ENDPOINT = 'http://whatever.it.is.com/api'
 
 app.post('/', (req, res) => {
+  console.log(util.inspect(req));
   const twiml = new twilio.TwimlResponse();
 
   twiml.message('English or Espanol?')
@@ -47,6 +50,7 @@ app.post('/', (req, res) => {
 });
 
 app.post('/lang', (req, res) => {
+  console.log(util.inspect(req));
   const twiml = new twilio.TwimlResponse();
   let lang = '';
 
@@ -65,6 +69,7 @@ app.post('/lang', (req, res) => {
 });
 
 app.post('/zip', (req, res) => {
+  console.log(util.inspect(req));
   const twiml = new twilio.TwimlResponse();
   postObj.zipCode = parseInt(req.body.Body)
 
@@ -84,5 +89,13 @@ app.post('/zip', (req, res) => {
   res.end(twiml.toString());
 });
 
+app.get('/', (req, res) => {
+  console.log(util.inspect(req));
+  res.send(200);
+});
+
 http.createServer(app).listen(1337, () => {
   console.log('Express server listening on port 1337');
+});
+
+module.exports = app;
