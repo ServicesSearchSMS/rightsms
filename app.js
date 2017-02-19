@@ -62,12 +62,12 @@ app.post('/lang', twilio.webhook({validate: false}), (req, res) => {
   if (req.body.Body === 'Spanish') {
     lang = 'es';
     postObj.language = 'spanish';
-  } else if (req.body.Body === 'English') {
+  } else {
     lang = 'en'
     postObj.language = 'english';
   }
 
-  twiml.message(dict[lang].zipCode) //need to fix this part
+  twiml.message(dict[lang].zipCode);
 
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
