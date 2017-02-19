@@ -23,3 +23,8 @@ For security during dev, store the sid and authtoken in your bash session
 # Run
 ```$ ngrok http 80```
 ```$ gulp```
+
+# Quickstart Guides
+1. https://www.twilio.com/docs/quickstart/node/programmable-sms
+2. https://www.twilio.com/docs/guides/sms/how-to-create-sms-conversations-in-node-js#using-http-cookies-with-webhooks 
+3. https://www.twilio.com/docs/guides/sms/how-to-receive-and-reply-in-node-js#what-is-a-webhook
