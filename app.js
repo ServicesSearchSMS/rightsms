@@ -51,6 +51,7 @@ app.post('/', (req, res) => {
 
 app.get('/lang', twilio.webhook({validate: false}), (req, res) => {
   console.log(util.inspect(req));
+  res.send(200);
 });
 
 app.post('/lang', twilio.webhook({validate: false}), (req, res) => {
