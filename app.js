@@ -49,7 +49,7 @@ app.post('/', (req, res) => {
   res.end(twiml.toString());
 });
 
-app.post('/lang', (req, res) => {
+app.post('/lang', twilio.webhook({validate: false}), (req, res) => {
   console.log(util.inspect(req));
   const twiml = new twilio.TwimlResponse();
   let lang = '';
