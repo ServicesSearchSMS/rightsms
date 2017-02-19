@@ -49,6 +49,10 @@ app.post('/', (req, res) => {
   res.end(twiml.toString());
 });
 
+app.get('/lang', twilio.webhook({validate: false}), (req, res) => {
+  console.log(util.inspect(req));
+});
+
 app.post('/lang', twilio.webhook({validate: false}), (req, res) => {
   console.log(util.inspect(req));
   const twiml = new twilio.TwimlResponse();
@@ -62,7 +66,7 @@ app.post('/lang', twilio.webhook({validate: false}), (req, res) => {
     postObj.language = 'english';
   }
 
-  twiml.message(dict[lang].zipCode)
+  twiml.message(dict[lang].zipCode) //need to fix this part
 
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
