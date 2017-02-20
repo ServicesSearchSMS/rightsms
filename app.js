@@ -50,7 +50,7 @@ app.post('/', (req, res) => {
 
   switch (smsCount) {
     case 0:
-      wiml.message('English or Espanol?');
+      twiml.message('English or Espanol?');
       break;
     case 1:
       let lang = '';
