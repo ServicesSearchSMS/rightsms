@@ -5,15 +5,18 @@
 
 const accountSid = process.env.TWACCOUNTSID;
 const authToken = process.env.TWAUTHTOKEN;
+const sessionSecret = process.env.COOKIESECRET;
 //(347) 321-9435
 
 var http = require('http');
 var util = require('util');
 const twilio = require('twilio');
 const express = require('express');
+const session = require('express-session');
 const urlencoded = require('body-parser').urlencoded;
 
 const app = express();
+app.use(session({ secret: sessionSecret }));
 app.use(urlencoded({
   extended: false
 }));
@@ -41,17 +44,33 @@ let ONE_DEGREE_ENDPOINT = 'http://whatever.it.is.com/api'
 
 app.post('/', (req, res) => {
   console.log(util.inspect(req));
+  let smsCount = req.session.counter || 0;
   const twiml = new twilio.TwimlResponse();
 
-  twiml.message('English or Espanol?')
+  switch (smsCount) {
+    case 0:
+      wiml.message('English or Espanol?');
+      break;
+    case 1:
+      let lang = '';
 
+      if (req.body.Body === 'Spanish') {
+        lang = 'es';
+        postObj.language = 'spanish';
+      } else {
+        lang = 'en'
+        postObj.language = 'english';
+      }
+
+      twiml.message(dict[lang].zipCode);
+      break;
+    default:
+      wiml.message('English or Espanol?');
+  }
+  
+  req.session.counter = smsCount + 1;
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
-});
-
-app.get('/lang', twilio.webhook({validate: false}), (req, res) => {
-  console.log(util.inspect(req));
-  res.send(200);
 });
 
 app.post('/lang', twilio.webhook({validate: false}), (req, res) => {
