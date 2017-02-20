@@ -46,7 +46,7 @@ app.post('/', (req, res) => {
   console.log(util.inspect(req));
   let smsCount = req.session.counter || 0;
   const twiml = new twilio.TwimlResponse();
-  console.console.log('smsCount: ' + smsCount);
+  console.log('smsCount: ' + smsCount);
 
   switch (smsCount) {
     case 0:
